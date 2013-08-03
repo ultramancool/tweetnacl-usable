@@ -3,13 +3,7 @@
 #define FOR(i,n) for (i = 0;i < n;++i)
 #define sv static void
 
-typedef unsigned char u8;
-typedef unsigned int u32;
-typedef unsigned long long u64;
-typedef long long i64;
-typedef i64 gf[16];
-
-extern void randombytes(u8 *, u64);
+extern void randombytes(u8 *, u32);
 
 static const u8 _0[16], _9[32] = {9};
 
