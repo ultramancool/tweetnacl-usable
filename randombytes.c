@@ -1,8 +1,7 @@
 #ifdef WIN32
 #include "Windows.h"
-#else
-#include <stdio.h>
 #endif
+#include <stdio.h>
 #include <stdlib.h>
 
 void randombytes(unsigned char * ptr,unsigned int length) 
@@ -11,9 +10,13 @@ void randombytes(unsigned char * ptr,unsigned int length)
 #ifdef WIN32
 	static HCRYPTPROV prov = 0;
 	if (prov == 0) {
-		CryptAcquireContext( &prov,NULL,NULL,PROV_RSA_FULL,0);
+		if (!CryptAcquireContext(&prov, NULL, NULL, PROV_RSA_FULL, 0)) {
+			failed = 1;
+		}
 	}
-	CryptGenRandom(prov, length, ptr);
+	if (!failed && !CryptGenRandom(prov, length, ptr)) {
+		failed = 1;
+	}
 #else
 	FILE* fh = fopen("/dev/urandom", "rb");
 	if (fh != NULL) {
@@ -23,7 +26,7 @@ void randombytes(unsigned char * ptr,unsigned int length)
 		fclose(fh);
 	} else {
 		failed = 1;
-	}	
+	}
 #endif
 	/* 
          * yes, this is horrible error handling but we don't have better 
