@@ -59,14 +59,17 @@ int main() {
 	decryptedmessage[padded_mlen] = '\0';
 
 	printf("crypto_box returned: %d\n",crypto_box(ciphertext, (u8*)padded_message,  padded_mlen, nonce, pk2, sk));
+
+	free(padded_message);
 	
 	printf("\nCipher text: \n");
 	hexdump((char*)ciphertext, padded_mlen);
 	printf("crypto_box_open returned: %d\n", crypto_box_open((u8*)decryptedmessage, ciphertext, padded_mlen, nonce, pk, sk2));
-
+	free(ciphertext);
 	printf("\nDecrypted text: \n");
 	hexdump((char*)decryptedmessage, padded_mlen);
 
 	printf("%s\n", decryptedmessage+32);
+	free(decryptedmessage);
 	return 0;
 }
