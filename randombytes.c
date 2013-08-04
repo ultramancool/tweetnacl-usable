@@ -29,13 +29,13 @@ void randombytes(unsigned char * ptr,unsigned int length)
 	}
 #endif
 	/* 
-         * yes, this is horrible error handling but we don't have better 
-         * options from here and I don't want to start changing the design 
-         * of the library 
-         */
+	 * yes, this is horrible error handling but we don't have better 
+	 * options from here and I don't want to start changing the design 
+	 * of the library 
+	 */
 	if (failed) {
 		fprintf(stderr, "Generating random data failed. Please report "
-                                "this to https://github.com/ultramancool\n");
+						"this to https://github.com/ultramancool\n");
 		exit(1);
 	}
 }
