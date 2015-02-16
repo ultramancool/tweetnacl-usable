@@ -4,6 +4,8 @@
 #include "tweetnacl.h"
 #include "randombytes.h"
 
+typedef unsigned char u8;
+
 #define PUB_KEY_LEN 32
 #define PRIV_KEY_LEN 32
 #define NONCE_LEN 24
